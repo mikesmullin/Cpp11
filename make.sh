@@ -4,7 +4,7 @@ if [ -z $2 ]; then
   echo "You must supply the src file basename."
   exit 1
 fi
-FILE=$2
+BASENAME=$2
 
 case $1 in
   watch )
@@ -12,21 +12,21 @@ case $1 in
     while true; do
       clear
 
-      ./make.sh all $FILE
+      ./make.sh all $BASENAME
 
       if [ $? -eq 0 ]; then
         echo -e "---> Executing...\n"
-        build/$FILE &
+        build/$BASENAME &
         PID="$!"
       else
         PID=""
       fi
 
       # watch for file change
-      inotifywait -q -q -e 'close_write' $FILE.cpp
+      inotifywait -q -q -e 'close_write' $BASENAME.cpp
 
       # kill the process
-      if [ "$PID" ] ; then
+      if [ $PID -gt 0 ] ; then
         kill $PID
       fi
     done
@@ -38,8 +38,8 @@ case $1 in
   all)
     echo -e "---> Building...\n"
     mkdir -p build/ && \
-    g++ -std=c++11 -o build/$FILE $FILE.cpp && \
-    chmod +x build/$FILE
+    g++ -std=c++11 -o build/$BASENAME $BASENAME.cpp && \
+    chmod +x build/$BASENAME
     ;;
   *)
     echo "Usage: $0 {all|clean|watch}"
