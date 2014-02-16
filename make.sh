@@ -49,10 +49,10 @@ case $1 in
   all)
     echo -e "---> Building...\n"
     mkdir -p build/ && \
-    #g++ -std=c++11 -o build/$BASENAME $BASENAME.cpp && \
-    g++ -std=c++11 -c Vector.cpp -o build/Vector.o && \
-    g++ -std=c++11 -c $BASENAME.cpp -o build/$BASENAME.o && \
-    g++ -std=c++11 -o build/$BASENAME build/Vector.o build/$BASENAME.o && \
+    g++ -std=c++11 -o build/$BASENAME $BASENAME.cpp && \
+    #g++ -std=c++11 -c Vector.cpp -o build/Vector.o && \
+    #g++ -std=c++11 -c $BASENAME.cpp -o build/$BASENAME.o && \
+    #g++ -std=c++11 -o build/$BASENAME build/Vector.o build/$BASENAME.o && \
     chmod +x build/$BASENAME
     ;;
   *)
