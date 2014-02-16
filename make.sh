@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
+#
+# Mike's Makefile Alternative
+#
+# Usage:
+#   ./make.sh all copy1
+#   ./make.sh watch copy1
+#
+
 #set -x
+
 if [ -z $2 ]; then
   echo "You must supply the src file basename."
   exit 1
@@ -7,6 +16,8 @@ fi
 BASENAME=$2
 
 case $1 in
+  # makes dev cycles feel faster;
+  # more like a scripting language
   watch )
     echo -e "---> Watching...\n"
     while true; do
